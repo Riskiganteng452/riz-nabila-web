@@ -1,0 +1,1158 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Riz & Nabila — Bot WhatsApp Premium Elite</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0c0c14;
+            color: #e8e8f0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            padding-top: 80px; /* kasih jarak biar konten tidak ketutupan navbar */
+        }
+
+        /* ===== CLEAN BACKGROUND ===== */
+        .bg-gradient {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            background: radial-gradient(ellipse at 20% 30%, rgba(60, 40, 120, 0.10) 0%, transparent 60%),
+                        radial-gradient(ellipse at 80% 70%, rgba(120, 40, 90, 0.06) 0%, transparent 60%),
+                        #0c0c14;
+            pointer-events: none;
+        }
+
+        /* ===== NAVBAR STICKY — TETAP DI ATAS ===== */
+        .navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 28px;
+            background: rgba(12, 12, 20, 0.75);
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            flex-wrap: wrap;
+            gap: 12px;
+            transition: all 0.3s ease;
+            max-width: 100%;
+        }
+
+        /* saat di-scroll, navbar semakin transparan dan tipis */
+        .navbar.scrolled {
+            background: rgba(12, 12, 20, 0.92);
+            padding: 8px 28px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .logo-icon {
+            width: 38px;
+            height: 38px;
+            background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 17px;
+            font-weight: 800;
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(167, 139, 250, 0.12);
+        }
+        .logo-text {
+            font-size: 19px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #f0eaff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.3px;
+        }
+        .logo-text span {
+            font-weight: 300;
+            font-size: 10px;
+            display: block;
+            color: rgba(255,255,255,0.15);
+            -webkit-text-fill-color: rgba(255,255,255,0.15);
+            letter-spacing: 1.5px;
+            margin-top: 1px;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.3);
+            text-decoration: none;
+            font-size: 12.5px;
+            font-weight: 500;
+            transition: 0.3s;
+            letter-spacing: 0.2px;
+            white-space: nowrap;
+        }
+        .nav-links a:hover {
+            color: #a78bfa;
+        }
+        .nav-cta {
+            background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+            padding: 8px 20px;
+            border-radius: 60px;
+            color: #fff !important;
+            font-weight: 600 !important;
+            font-size: 12px !important;
+            box-shadow: 0 4px 18px rgba(167, 139, 250, 0.12);
+            transition: 0.3s;
+        }
+        .nav-cta:hover {
+            transform: scale(1.04);
+            box-shadow: 0 6px 28px rgba(167, 139, 250, 0.2);
+        }
+
+        /* ===== CONTAINER ===== */
+        .container {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 24px 80px;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            text-align: center;
+            padding: 30px 0 20px;
+        }
+
+        .hero .badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(167, 139, 250, 0.05);
+            border: 1px solid rgba(167, 139, 250, 0.06);
+            padding: 5px 16px 5px 10px;
+            border-radius: 60px;
+            font-size: 10px;
+            font-weight: 600;
+            color: #a78bfa;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        .hero .badge i {
+            font-size: 9px;
+        }
+
+        .hero h1 {
+            font-size: 52px;
+            font-weight: 900;
+            line-height: 1.05;
+            letter-spacing: -2px;
+            background: linear-gradient(to right, #ffffff 20%, #c4b5fd 50%, #a78bfa 80%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            max-width: 800px;
+            margin: 0 auto 12px;
+        }
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #ff7b9d, #ff3c9e);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero .sub {
+            font-size: 17px;
+            color: rgba(255,255,255,0.30);
+            max-width: 500px;
+            margin: 0 auto 24px;
+            font-weight: 300;
+            line-height: 1.7;
+        }
+
+        .hero .owner-box {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 8px 20px 8px 16px;
+            border-radius: 60px;
+            backdrop-filter: blur(4px);
+            font-size: 13px;
+            color: rgba(255,255,255,0.2);
+        }
+        .hero .owner-box i {
+            color: #a78bfa;
+        }
+        .hero .owner-box strong {
+            color: #c4b5fd;
+            font-weight: 600;
+        }
+        .hero .owner-box .status {
+            display: inline-block;
+            width: 7px;
+            height: 7px;
+            background: #34d399;
+            border-radius: 50%;
+            margin-left: 4px;
+            animation: pulse 1.5s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.2; }
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 44px;
+            margin-top: 34px;
+            flex-wrap: wrap;
+        }
+        .hero-stats .stat {
+            text-align: center;
+        }
+        .hero-stats .stat .num {
+            font-size: 28px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .hero-stats .stat .label {
+            font-size: 11px;
+            color: rgba(255,255,255,0.12);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 3px;
+        }
+
+        /* ===== PRICING ===== */
+        .section-title {
+            text-align: center;
+            margin: 60px 0 34px;
+        }
+        .section-title h2 {
+            font-size: 34px;
+            font-weight: 800;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #fff, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .section-title p {
+            color: rgba(255,255,255,0.15);
+            font-size: 14px;
+            margin-top: 6px;
+        }
+
+        .pricing {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 26px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.012);
+            border-radius: 32px;
+            padding: 36px 26px 30px;
+            border: 1px solid rgba(255,255,255,0.03);
+            backdrop-filter: blur(4px);
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(167, 139, 250, 0.10);
+            background: rgba(255,255,255,0.018);
+            box-shadow: 0 24px 48px rgba(0,0,0,0.3);
+        }
+
+        .card.popular {
+            border-color: rgba(167, 139, 250, 0.15);
+            background: rgba(167, 139, 250, 0.015);
+        }
+        .card.popular .popular-badge {
+            display: inline-block;
+            background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+            color: #fff;
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            padding: 4px 14px;
+            border-radius: 40px;
+            letter-spacing: 0.8px;
+            margin-bottom: 12px;
+        }
+
+        .card .icon {
+            font-size: 32px;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .card .name {
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+        .card .duration {
+            font-size: 12px;
+            color: rgba(255,255,255,0.18);
+            font-weight: 300;
+            margin-bottom: 8px;
+        }
+        .card .price {
+            font-size: 44px;
+            font-weight: 900;
+            letter-spacing: -2px;
+            background: linear-gradient(135deg, #ffffff, #c4b5fd);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 2px;
+        }
+        .card .price-sub {
+            font-size: 12px;
+            color: rgba(255,255,255,0.12);
+            margin-bottom: 20px;
+        }
+
+        .card .features {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+        .card .features li {
+            padding: 6px 0;
+            font-size: 13px;
+            color: rgba(255,255,255,0.40);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid rgba(255,255,255,0.01);
+        }
+        .card .features li i {
+            color: #a78bfa;
+            font-size: 12px;
+            width: 18px;
+            text-align: center;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            padding: 13px;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            letter-spacing: 0.2px;
+        }
+        .btn i {
+            font-size: 14px;
+        }
+        .btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 8px 32px rgba(167, 139, 250, 0.15);
+        }
+
+        /* ===== AI NABILA CHAT ===== */
+        .ai-section {
+            margin: 60px 0 24px;
+            background: rgba(255,255,255,0.008);
+            border: 1px solid rgba(255,255,255,0.02);
+            border-radius: 32px;
+            padding: 32px 28px;
+            backdrop-filter: blur(4px);
+        }
+
+        .ai-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
+        }
+        .ai-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff6b9d, #a78bfa);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            color: #fff;
+            box-shadow: 0 4px 20px rgba(167, 139, 250, 0.10);
+            flex-shrink: 0;
+        }
+        .ai-info h3 {
+            font-size: 18px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #f0eaff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ai-info p {
+            font-size: 12px;
+            color: rgba(255,255,255,0.15);
+        }
+        .ai-info .online-dot {
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background: #34d399;
+            border-radius: 50%;
+            margin-right: 4px;
+            animation: pulse 1.5s infinite;
+        }
+
+        .chat-box {
+            max-height: 360px;
+            overflow-y: auto;
+            padding-right: 6px;
+            margin-bottom: 16px;
+            scroll-behavior: smooth;
+        }
+        .chat-box::-webkit-scrollbar {
+            width: 3px;
+        }
+        .chat-box::-webkit-scrollbar-track {
+            background: rgba(255,255,255,0.01);
+            border-radius: 10px;
+        }
+        .chat-box::-webkit-scrollbar-thumb {
+            background: rgba(167, 139, 250, 0.15);
+            border-radius: 10px;
+        }
+
+        .chat-msg {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 12px;
+            animation: fadeUp 0.25s ease;
+        }
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg.user {
+            flex-direction: row-reverse;
+        }
+        .chat-msg .bubble {
+            max-width: 78%;
+            padding: 10px 16px;
+            border-radius: 16px;
+            font-size: 13.5px;
+            line-height: 1.7;
+            word-wrap: break-word;
+        }
+        .chat-msg.ai .bubble {
+            background: rgba(167, 139, 250, 0.04);
+            border: 1px solid rgba(167, 139, 250, 0.03);
+            color: rgba(255,255,255,0.80);
+            border-bottom-left-radius: 3px;
+        }
+        .chat-msg.user .bubble {
+            background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+            color: #fff;
+            border-bottom-right-radius: 3px;
+        }
+        .chat-msg .avatar-mini {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            font-weight: 700;
+            color: #fff;
+        }
+        .chat-msg.ai .avatar-mini {
+            background: linear-gradient(135deg, #ff6b9d, #a78bfa);
+        }
+        .chat-msg.user .avatar-mini {
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.15);
+        }
+
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .chat-input-area input {
+            flex: 1;
+            padding: 12px 18px;
+            border-radius: 60px;
+            background: rgba(255,255,255,0.015);
+            border: 1px solid rgba(255,255,255,0.03);
+            color: #e8e8f0;
+            font-size: 13px;
+            outline: none;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .chat-input-area input::placeholder {
+            color: rgba(255,255,255,0.10);
+        }
+        .chat-input-area input:focus {
+            border-color: rgba(167, 139, 250, 0.12);
+            background: rgba(255,255,255,0.02);
+        }
+        .chat-input-area button {
+            padding: 12px 22px;
+            border-radius: 60px;
+            background: linear-gradient(135deg, #7c5cfc, #a78bfa);
+            border: none;
+            color: #fff;
+            font-weight: 600;
+            font-size: 13px;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+        }
+        .chat-input-area button:hover {
+            transform: scale(1.03);
+            box-shadow: 0 4px 24px rgba(167, 139, 250, 0.12);
+        }
+        .chat-input-area button i {
+            font-size: 13px;
+        }
+
+        .quick-reply {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 12px;
+        }
+        .quick-reply button {
+            padding: 5px 14px;
+            border-radius: 40px;
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.02);
+            color: rgba(255,255,255,0.20);
+            font-size: 11.5px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+        .quick-reply button:hover {
+            background: rgba(167, 139, 250, 0.03);
+            border-color: rgba(167, 139, 250, 0.06);
+            color: #a78bfa;
+        }
+
+        /* ===== TESTIMONIAL ===== */
+        .testimonials {
+            margin: 50px 0 24px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .testi {
+            background: rgba(255,255,255,0.008);
+            border: 1px solid rgba(255,255,255,0.015);
+            border-radius: 20px;
+            padding: 20px 16px;
+            text-align: left;
+        }
+        .testi .stars {
+            color: #fbbf24;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-bottom: 4px;
+        }
+        .testi p {
+            font-size: 13px;
+            color: rgba(255,255,255,0.35);
+            line-height: 1.6;
+        }
+        .testi .user {
+            margin-top: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255,255,255,0.15);
+        }
+        .testi .user i {
+            color: #a78bfa;
+            margin-right: 6px;
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.015);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        .footer .copy {
+            font-size: 11px;
+            color: rgba(255,255,255,0.06);
+        }
+        .footer .copy strong {
+            color: rgba(255,255,255,0.12);
+            font-weight: 500;
+        }
+        .footer .socials {
+            display: flex;
+            gap: 16px;
+        }
+        .footer .socials a {
+            color: rgba(255,255,255,0.06);
+            font-size: 16px;
+            transition: 0.3s;
+        }
+        .footer .socials a:hover {
+            color: #a78bfa;
+            transform: translateY(-2px);
+        }
+
+        /* ===== FLOATING WHATSAPP ===== */
+        .wa-float {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            z-index: 999;
+            background: #25d366;
+            width: 56px;
+            height: 56px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: #fff;
+            box-shadow: 0 8px 32px rgba(37, 211, 102, 0.18);
+            transition: 0.3s;
+            text-decoration: none;
+        }
+        .wa-float:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(37, 211, 102, 0.25);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            body { padding-top: 70px; }
+            .navbar { padding: 10px 16px; }
+            .navbar.scrolled { padding: 6px 16px; }
+            .logo-text { font-size: 16px; }
+            .logo-icon { width: 32px; height: 32px; font-size: 14px; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 11px; }
+            .nav-cta { padding: 6px 14px; font-size: 10px !important; }
+            .hero h1 { font-size: 30px; letter-spacing: -1px; }
+            .hero-stats { gap: 24px; }
+            .hero-stats .stat .num { font-size: 22px; }
+            .section-title h2 { font-size: 24px; }
+            .card { padding: 24px 16px; }
+            .card .price { font-size: 34px; }
+            .testimonials { grid-template-columns: 1fr; }
+            .footer { flex-direction: column; text-align: center; }
+            .ai-section { padding: 18px 14px; }
+            .chat-input-area { flex-direction: column; }
+            .chat-input-area button { width: 100%; justify-content: center; }
+            .ai-header { flex-wrap: wrap; }
+            .quick-reply { justify-content: center; }
+            .chat-msg .bubble { max-width: 92%; font-size: 12.5px; }
+            .container { padding: 12px 14px 60px; }
+        }
+
+        @media (max-width: 480px) {
+            body { padding-top: 60px; }
+            .hero h1 { font-size: 24px; }
+            .pricing { grid-template-columns: 1fr; }
+            .wa-float { width: 46px; height: 46px; font-size: 22px; bottom: 16px; right: 16px; }
+            .hero .owner-box { font-size: 11px; padding: 6px 14px; flex-wrap: wrap; justify-content: center; }
+            .navbar { padding: 8px 12px; }
+            .logo-text { font-size: 14px; }
+            .logo-icon { width: 28px; height: 28px; font-size: 12px; }
+            .nav-cta { padding: 4px 12px; font-size: 9px !important; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- CLEAN BACKGROUND -->
+    <div class="bg-gradient"></div>
+
+    <!-- FLOATING WHATSAPP -->
+    <a href="https://wa.me/6283171690095?text=Halo%20Riz%20%26%20Nabila%2C%20saya%20mau%20sewa%20bot%20WhatsApp" class="wa-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- ===== NAVBAR STICKY — TETAP DI ATAS ===== -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <div class="logo-icon">R</div>
+            <div class="logo-text">
+                Riz & Nabila
+                <span>✦ BOT PREMIUM</span>
+            </div>
+        </div>
+        <div class="nav-links">
+            <a href="#pricing">Paket</a>
+            <a href="#testi">Testimoni</a>
+            <a href="#ai-nabila">AI Nabila</a>
+            <a href="https://wa.me/6283171690095" class="nav-cta" target="_blank">
+                <i class="fas fa-headset"></i> Hubungi
+            </a>
+        </div>
+    </nav>
+
+    <div class="container">
+
+        <!-- HERO -->
+        <section class="hero">
+            <div class="badge">
+                <i class="fas fa-circle"></i> 24/7 Active Support
+            </div>
+            <h1>
+                Sewa Bot WhatsApp<br>
+                <span class="highlight">Premium & Terpercaya</span>
+            </h1>
+            <p class="sub">
+                Otomatisasi bisnis Anda dengan bot WhatsApp canggih. Cepat, aman, dan didukung penuh oleh tim profesional.
+            </p>
+            <div class="owner-box">
+                <i class="fas fa-crown"></i>
+                Owner Utama: <strong>+62 831-7169-0095</strong>
+                <span class="status"></span>
+                <span style="font-size:10px;color:rgba(255,255,255,0.08);">Online</span>
+            </div>
+
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="num">500+</div>
+                    <div class="label">Client Aktif</div>
+                </div>
+                <div class="stat">
+                    <div class="num">98%</div>
+                    <div class="label">Kepuasan</div>
+                </div>
+                <div class="stat">
+                    <div class="num">24/7</div>
+                    <div class="label">Support</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRICING -->
+        <div class="section-title" id="pricing">
+            <h2>Pilih Paket Anda</h2>
+            <p>Harga terjangkau, fitur lengkap, garansi terbaik</p>
+        </div>
+
+        <div class="pricing">
+            <div class="card">
+                <span class="icon">⚡</span>
+                <div class="name">Starter</div>
+                <div class="duration">1 Minggu</div>
+                <div class="price">Rp15.000</div>
+                <div class="price-sub">Cocok untuk uji coba</div>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> Full akses bot</li>
+                    <li><i class="fas fa-check-circle"></i> Support 24/7</li>
+                    <li><i class="fas fa-check-circle"></i> Update gratis</li>
+                    <li><i class="fas fa-check-circle"></i> Garansi 3 hari</li>
+                </ul>
+                <a href="https://wa.me/6283171690095?text=Halo%20Riz%20%26%20Nabila%2C%20saya%20mau%20sewa%20paket%201%20Minggu%20Rp15.000" class="btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Sewa Sekarang
+                </a>
+            </div>
+
+            <div class="card popular">
+                <div class="popular-badge">★ POPULAR</div>
+                <span class="icon">🔥</span>
+                <div class="name">Pro</div>
+                <div class="duration">1 Bulan</div>
+                <div class="price">Rp25.000</div>
+                <div class="price-sub">Nilai terbaik & paling laris</div>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> Full akses bot</li>
+                    <li><i class="fas fa-check-circle"></i> Support prioritas</li>
+                    <li><i class="fas fa-check-circle"></i> Update premium</li>
+                    <li><i class="fas fa-check-circle"></i> Garansi 7 hari</li>
+                    <li><i class="fas fa-check-circle"></i> Kustomisasi ringan</li>
+                </ul>
+                <a href="https://wa.me/6283171690095?text=Halo%20Riz%20%26%20Nabila%2C%20saya%20mau%20sewa%20paket%201%20Bulan%20Rp25.000" class="btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Sewa Sekarang
+                </a>
+            </div>
+
+            <div class="card">
+                <span class="icon">👑</span>
+                <div class="name">Bisnis</div>
+                <div class="duration">2 Bulan</div>
+                <div class="price">Rp35.000</div>
+                <div class="price-sub">Hemat 30% + bonus</div>
+                <ul class="features">
+                    <li><i class="fas fa-check-circle"></i> Full akses bot</li>
+                    <li><i class="fas fa-check-circle"></i> Support VIP</li>
+                    <li><i class="fas fa-check-circle"></i> Update eksklusif</li>
+                    <li><i class="fas fa-check-circle"></i> Garansi 14 hari</li>
+                    <li><i class="fas fa-check-circle"></i> Kustomisasi penuh</li>
+                    <li><i class="fas fa-check-circle"></i> Dedicated server</li>
+                </ul>
+                <a href="https://wa.me/6283171690095?text=Halo%20Riz%20%26%20Nabila%2C%20saya%20mau%20sewa%20paket%202%20Bulan%20Rp35.000" class="btn" target="_blank">
+                    <i class="fab fa-whatsapp"></i> Sewa Sekarang
+                </a>
+            </div>
+        </div>
+
+        <!-- AI NABILA CHAT -->
+        <div class="ai-section" id="ai-nabila">
+            <div class="ai-header">
+                <div class="ai-avatar">N</div>
+                <div class="ai-info">
+                    <h3>🤖 AI Nabila — Asisten Virtual</h3>
+                    <p><span class="online-dot"></span> Online 24/7 — Jawaban lengkap & detail</p>
+                </div>
+            </div>
+
+            <div class="chat-box" id="chatBox">
+                <div class="chat-msg ai">
+                    <div class="avatar-mini">N</div>
+                    <div class="bubble">
+                        <strong>Halo! Saya Nabila, asisten virtual dari Riz & Nabila.</strong> 👋<br><br>
+                        Saya di sini untuk membantu Anda dengan <strong>informasi LENGKAP</strong> tentang layanan sewa bot WhatsApp kami.<br><br>
+                        Silakan tanyakan apapun, saya akan jawab dengan detail:<br><br>
+                        💰 <strong>Harga Paket</strong> — detail biaya per minggu/bulan<br>
+                        ⚙️ <strong>Fitur Bot</strong> — semua kemampuan bot kami<br>
+                        📝 <strong>Cara Sewa</strong> — langkah-langkah mudah<br>
+                        🛡️ <strong>Garansi</strong> — perlindungan untuk Anda<br>
+                        🕒 <strong>Support 24/7</strong> — bantuan kapan saja<br>
+                        👤 <strong>Info Owner</strong> — kontak resmi kami<br>
+                        ❓ <strong>Pertanyaan Lain</strong> — apapun yang ingin Anda tahu<br><br>
+                        💡 Klik tombol cepat di bawah atau ketik pertanyaan Anda.
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatInput" placeholder="Tanyakan apapun ke Nabila..." />
+                <button id="sendBtn"><i class="fas fa-paper-plane"></i> Kirim</button>
+            </div>
+
+            <div class="quick-reply">
+                <button onclick="sendQuick('Harga paket sewa berapa?')">💰 Harga</button>
+                <button onclick="sendQuick('Fitur bot apa saja?')">⚙️ Fitur</button>
+                <button onclick="sendQuick('Cara sewa bot?')">📝 Cara Sewa</button>
+                <button onclick="sendQuick('Garansi sewa?')">🛡️ Garansi</button>
+                <button onclick="sendQuick('Support 24 jam?')">🕒 Support</button>
+                <button onclick="sendQuick('Siapa owner?')">👤 Owner</button>
+            </div>
+        </div>
+
+        <!-- TESTIMONIALS -->
+        <div class="section-title" id="testi" style="margin-top:40px;">
+            <h2>Testimoni Client</h2>
+            <p>Mereka sudah merasakan kemudahan dengan bot kami</p>
+        </div>
+
+        <div class="testimonials">
+            <div class="testi">
+                <div class="stars">★★★★★</div>
+                <p>"Botnya stabil banget, support cepat. Udah 3 bulan langganan di sini."</p>
+                <div class="user"><i class="fas fa-user-circle"></i> Andi — Pro</div>
+            </div>
+            <div class="testi">
+                <div class="stars">★★★★★</div>
+                <p>"Harga bersahabat, fitur lengkap. Owner ramah dan sigap."</p>
+                <div class="user"><i class="fas fa-user-circle"></i> Rina — Starter</div>
+            </div>
+            <div class="testi">
+                <div class="stars">★★★★★</div>
+                <p>"Paket Bisnis sangat worth it. Bot jalan 24 jam tanpa kendala."</p>
+                <div class="user"><i class="fas fa-user-circle"></i> Budi — Bisnis</div>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="footer">
+            <div class="copy">
+                &copy; 2026 <strong>Riz & Nabila</strong> — Premium Bot WhatsApp
+            </div>
+            <div class="socials">
+                <a href="https://wa.me/6283171690095" target="_blank"><i class="fab fa-whatsapp"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-telegram-plane"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+            </div>
+        </footer>
+
+    </div>
+
+    <script>
+        // ===== NAVBAR SCROLL EFFECT =====
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 30) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // ===== AI NABILA CHATBOT =====
+        const chatBox = document.getElementById('chatBox');
+        const chatInput = document.getElementById('chatInput');
+        const sendBtn = document.getElementById('sendBtn');
+
+        const knowledge = {
+            'harga': `💰 <strong>DETAIL HARGA PAKET SEWA BOT WHATSAPP</strong><br><br>
+        📌 <strong>Paket Starter (1 Minggu)</strong><br>
+        • Harga: <strong>Rp15.000</strong><br>
+        • Cocok untuk: Uji coba / pemula<br>
+        • Fitur: Full akses, support 24/7, update gratis<br>
+        • Garansi: 3 hari<br><br>
+        📌 <strong>Paket Pro (1 Bulan) — PALING LARIS!</strong><br>
+        • Harga: <strong>Rp25.000</strong><br>
+        • Cocok untuk: Pengguna aktif / bisnis kecil<br>
+        • Fitur: Full akses, support prioritas, update premium<br>
+        • Garansi: 7 hari<br>
+        • Bonus: Kustomisasi ringan<br><br>
+        📌 <strong>Paket Bisnis (2 Bulan) — HEMAT 30%</strong><br>
+        • Harga: <strong>Rp35.000</strong><br>
+        • Cocok untuk: Bisnis menengah / besar<br>
+        • Fitur: Full akses, support VIP, update eksklusif<br>
+        • Garansi: 14 hari<br>
+        • Bonus: Kustomisasi penuh, dedicated server<br><br>
+        💡 <strong>Semua paket sudah termasuk:</strong><br>
+        ✅ Bot aktif 24/7<br>
+        ✅ Anti-banned<br>
+        ✅ Multi-device<br>
+        ✅ Dashboard monitoring<br>
+        ✅ Update berkala seumur hidup paket<br><br>
+        🔥 <strong>Promo:</strong> Bayar 2 bulan dapat bonus 1 minggu gratis!<br><br>
+        Chat owner: <strong>+62 831-7169-0095</strong>`,
+
+            'fitur': `⚙️ <strong>FITUR LENGKAP BOT WHATSAPP KAMI</strong><br><br>
+        🟣 <strong>Fitur Utama:</strong><br>
+        • ✅ <strong>Auto Reply</strong> — Balas otomatis pesan masuk<br>
+        • ✅ <strong>Broadcast Massal</strong> — Kirim pesan ke banyak kontak sekaligus<br>
+        • ✅ <strong>Schedule Pesan</strong> — Jadwalkan pengiriman otomatis<br>
+        • ✅ <strong>Anti-Spam</strong> — Proteksi dari spam dan blokir<br>
+        • ✅ <strong>Multi-Device</strong> — Bisa digunakan di banyak perangkat<br>
+        • ✅ <strong>Dashboard Monitoring</strong> — Pantau aktivitas bot secara real-time<br><br>
+        🟣 <strong>Fitur Tambahan:</strong><br>
+        • ✅ <strong>Kustomisasi Pesan</strong> — Sesuaikan template sesuai brand Anda<br>
+        • ✅ <strong>Auto-Responder</strong> — Respon cerdas berdasarkan kata kunci<br>
+        • ✅ <strong>Group Manager</strong> — Kelola grup WhatsApp dengan mudah<br>
+        • ✅ <strong>Media Support</strong> — Kirim gambar, video, dokumen<br>
+        • ✅ <strong>Log Aktivitas</strong> — Riwayat lengkap semua pesan<br><br>
+        💡 <strong>Semua fitur sudah termasuk di semua paket!</strong><br>
+        Chat owner: <strong>+62 831-7169-0095</strong>`,
+
+            'sewa': `📝 <strong>CARA SEWA BOT WHATSAPP — MUDAH & CEPAT</strong><br><br>
+        🔹 <strong>Langkah 1:</strong> Pilih Paket (Starter/Pro/Bisnis)<br>
+        🔹 <strong>Langkah 2:</strong> Klik Tombol "Sewa Sekarang"<br>
+        🔹 <strong>Langkah 3:</strong> Chat ke <strong>+62 831-7169-0095</strong><br>
+        🔹 <strong>Langkah 4:</strong> Transfer sesuai harga paket<br>
+        🔹 <strong>Langkah 5:</strong> Bot aktif < 5 menit 🚀<br><br>
+        💳 <strong>Metode Pembayaran:</strong> Bank Transfer, E-Wallet, QRIS<br><br>
+        Chat owner: <strong>+62 831-7169-0095</strong>`,
+
+            'garansi': `🛡️ <strong>GARANSI & KEBIJAKAN REFUND</strong><br><br>
+        📌 <strong>Starter (1 Minggu)</strong> — Garansi 3 hari<br>
+        📌 <strong>Pro (1 Bulan)</strong> — Garansi 7 hari<br>
+        📌 <strong>Bisnis (2 Bulan)</strong> — Garansi 14 hari<br><br>
+        🔒 <strong>Kebijakan Refund:</strong><br>
+        ✅ Refund 100% jika bot tidak bisa digunakan dalam 24 jam pertama<br>
+        ✅ Refund 50% jika ada kendala di hari ke-2 s/d garansi berakhir<br>
+        ❌ Tidak ada refund jika pemakaian melewati masa garansi<br><br>
+        Chat owner: <strong>+62 831-7169-0095</strong>`,
+
+            'support': `🕒 <strong>SUPPORT 24/7 — KAMI SELALU SIAP</strong><br><br>
+        📌 <strong>Cara Menghubungi Support:</strong><br>
+        • 💬 <strong>Chat WhatsApp:</strong> +62 831-7169-0095<br>
+        • 🤖 <strong>AI Nabila:</strong> Chat di sini (24/7)<br><br>
+        ⏱️ <strong>Waktu Respon:</strong><br>
+        • < 5 menit untuk chat WhatsApp<br>
+        • < 1 menit untuk AI Nabila<br><br>
+        📋 <strong>Yang Bisa Kami Bantu:</strong><br>
+        • Instalasi & aktivasi bot<br>
+        • Troubleshooting error<br>
+        • Konsultasi fitur<br>
+        • Perpanjangan paket<br>
+        • Upgrade/downgrade paket<br><br>
+        Hubungi kami kapan saja! <strong>+62 831-7169-0095</strong>`,
+
+            'owner': `👤 <strong>INFO OWNER RESMI — RIZ & NABILA</strong><br><br>
+        📌 <strong>Nama Owner:</strong> Riz & Nabila<br>
+        📱 <strong>Nomor Utama:</strong> +62 831-7169-0095<br><br>
+        🏢 <strong>Bisnis:</strong> Penyedia layanan bot WhatsApp premium<br>
+        📍 <strong>Berbasis:</strong> Indonesia (Online 24/7)<br><br>
+        💼 <strong>Pengalaman:</strong><br>
+        • 3+ tahun di industri bot WhatsApp<br>
+        • 500+ client aktif<br>
+        • 98% tingkat kepuasan<br><br>
+        ✅ <strong>Verifikasi:</strong><br>
+        • Hanya ada 1 owner resmi: Riz & Nabila<br>
+        • Hati-hati penipuan yang mengatasnamakan kami<br><br>
+        ➡️ <strong>Hubungi sekarang:</strong> <a href="https://wa.me/6283171690095" style="color:#a78bfa;text-decoration:underline;">+62 831-7169-0095</a>`,
+
+            'bot': `🤖 <strong>APA ITU BOT WHATSAPP?</strong><br><br>
+        Bot WhatsApp adalah sistem otomatis yang bisa:<br><br>
+        ✅ <strong>Membalas pesan otomatis</strong><br>
+        ✅ <strong>Mengirim broadcast ke banyak kontak</strong><br>
+        ✅ <strong>Menjadwalkan pengiriman pesan</strong><br>
+        ✅ <strong>Mengelola grup WhatsApp</strong><br>
+        ✅ <strong>Membantu bisnis Anda 24/7 tanpa henti</strong><br><br>
+        📌 <strong>Manfaat untuk Bisnis Anda:</strong><br>
+        • 🚀 Efisiensi waktu — otomatisasi tugas berulang<br>
+        • 💰 Hemat biaya — tidak perlu banyak CS<br>
+        • 📈 Skalabilitas — layani ribuan pelanggan sekaligus<br><br>
+        🔥 <strong>Mulai pakai sekarang!</strong> Chat owner: <strong>+62 831-7169-0095</strong>`,
+
+            'hello': `Halo juga! 👋<br><br>
+        Senang sekali Anda mampir ke <strong>Riz & Nabila</strong>.<br>
+        Saya <strong>Nabila</strong>, asisten virtual di sini.<br><br>
+        💡 <strong>Yang bisa saya bantu:</strong><br>
+        • 💰 Info lengkap harga paket<br>
+        • ⚙️ Semua fitur bot WhatsApp<br>
+        • 📝 Panduan cara sewa<br>
+        • 🛡️ Detail garansi & refund<br>
+        • 🕒 Support 24/7<br>
+        • 👤 Info owner resmi<br><br>
+        Klik tombol cepat di bawah atau ketik pertanyaan Anda! 😊`,
+
+            'hai': `Hai! 👋 Selamat datang di <strong>Riz & Nabila</strong>.<br><br>
+        Saya <strong>Nabila</strong>, asisten virtual siap membantu.<br><br>
+        📌 <strong>Mulai dengan:</strong><br>
+        • Ketik "Harga" untuk detail biaya<br>
+        • Ketik "Fitur" untuk semua kemampuan bot<br>
+        • Ketik "Cara sewa" untuk panduan<br>
+        • Ketik "Garansi" untuk kebijakan<br>
+        • Ketik "Support" untuk bantuan<br>
+        • Ketik "Owner" untuk kontak resmi<br><br>
+        Klik tombol cepat di bawah! 🚀`,
+
+            'help': `🆘 <strong>PUSAT BANTUAN — AI NABILA</strong><br><br>
+        Saya bisa bantu kamu dengan <strong>INFORMASI LENGKAP</strong> tentang:<br><br>
+        💰 <strong>"Harga"</strong> — Detail biaya per paket<br>
+        ⚙️ <strong>"Fitur"</strong> — Semua kemampuan bot<br>
+        📝 <strong>"Cara sewa"</strong> — Langkah-langkah mudah<br>
+        🛡️ <strong>"Garansi"</strong> — Perlindungan & refund<br>
+        🕒 <strong>"Support"</strong> — Bantuan 24/7<br>
+        👤 <strong>"Owner"</strong> — Kontak resmi kami<br>
+        🤖 <strong>"Bot"</strong> — Penjelasan bot WhatsApp<br><br>
+        💡 <strong>Klik tombol cepat di bawah untuk mulai!</strong>`
+        };
+
+        function getAIResponse(input) {
+            const lower = input.toLowerCase().trim();
+            for (const [key, value] of Object.entries(knowledge)) {
+                if (lower.includes(key)) {
+                    return value;
+                }
+            }
+            return `🤔 <strong>Pertanyaan yang bagus!</strong><br><br>
+        Saya Nabila akan bantu jawab dengan detail. Tapi sepertinya pertanyaan Anda belum spesifik.<br><br>
+        💡 <strong>Coba tanyakan salah satu ini:</strong><br>
+        • 💰 "Harga paket sewa berapa?"<br>
+        • ⚙️ "Fitur bot apa saja?"<br>
+        • 📝 "Cara sewa bot?"<br>
+        • 🛡️ "Garansi sewa?"<br>
+        • 🕒 "Support 24 jam?"<br>
+        • 👤 "Siapa owner?"<br><br>
+        Atau langsung chat owner: <strong>+62 831-7169-0095</strong> (fast response!)`;
+        }
+
+        function addMessage(text, isUser = false) {
+            const div = document.createElement('div');
+            div.className = `chat-msg ${isUser ? 'user' : 'ai'}`;
+            const avatar = document.createElement('div');
+            avatar.className = 'avatar-mini';
+            avatar.textContent = isUser ? '👤' : 'N';
+            const bubble = document.createElement('div');
+            bubble.className = 'bubble';
+            bubble.innerHTML = text;
+            div.appendChild(avatar);
+            div.appendChild(bubble);
+            chatBox.appendChild(div);
+            chatBox.scrollTop = chatBox.scrollHeight;
+        }
+
+        function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            addMessage(text, true);
+            chatInput.value = '';
+
+            const typingDiv = document.createElement('div');
+            typingDiv.className = 'chat-msg ai';
+            typingDiv.innerHTML = `<div class="avatar-mini">N</div><div class="bubble" style="font-style:italic;color:rgba(255,255,255,0.06);">Nabila sedang mengetik...</div>`;
+            chatBox.appendChild(typingDiv);
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            setTimeout(() => {
+                chatBox.removeChild(typingDiv);
+                const response = getAIResponse(text);
+                addMessage(response, false);
+            }, 500 + Math.random() * 400);
+        }
+
+        function sendQuick(text) {
+            chatInput.value = text;
+            sendMessage();
+        }
+
+        sendBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') sendMessage();
+        });
+    </script>
+</body>
+</html>
